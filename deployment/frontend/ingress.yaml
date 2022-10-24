@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bc58-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: bc58
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bc58.tk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fe-service
+                port:
+                  number: 80
+  
+    - host: mockdata.bc58.tk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ms-service
+                port:
+                  number: 3003

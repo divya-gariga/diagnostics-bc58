@@ -1,0 +1,248 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deploy
+  labels:
+    name: gateway-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: gateway
+  template:
+    metadata:
+      name: gateway-pod
+      labels:
+        name: gateway
+        app: bc58-app
+    spec:
+      containers:
+        - name: api-gateway-img
+          image: ghcr.io/divya-gariga/bc58-api-gateway:latest
+          ports:
+            - containerPort: 9191
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry-service-deploy
+  labels:
+    name: service-registry-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: service-registry
+  template:
+    metadata:
+      name: service-registry-pod
+      labels:
+        name: service-registry
+        app: bc58-app
+    spec:
+      containers:
+        - name: service-registry-img
+          image: ghcr.io/divya-gariga/bc58-service-registry:latest
+          ports:
+            - containerPort: 8761
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-service-deploy
+  labels:
+    name: appointment-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: appointment
+  template:
+    metadata:
+      name: appointment-pod
+      labels:
+        name: appointment
+        app: bc58-app
+    spec:
+      containers:
+        - name: appointment-img
+          image: ghcr.io/divya-gariga/bc58-appointments-service:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://ad84f05f932dd43258f50ff13e2ea493-1486960513.us-east-2.elb.amazonaws.com:3306/zemoso_diagnostics_bc58
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: bootcamp@!58
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: labs-service-deploy
+  labels:
+    name: labs-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: labs
+  template:
+    metadata:
+      name: labs-pod
+      labels:
+        name: labs
+        app: bc58-app
+    spec:
+      containers:
+        - name: labs-img
+          image: ghcr.io/divya-gariga/bc58-labs-service:latest
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://ad84f05f932dd43258f50ff13e2ea493-1486960513.us-east-2.elb.amazonaws.com:3306/zemoso_diagnostics_bc58
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: bootcamp@!58
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-service-deploy
+  labels:
+    name: patient-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: patient
+  template:
+    metadata:
+      name: patient-pod
+      labels:
+        name: patient
+        app: bc58-app
+    spec:
+      containers:
+        - name: patient-img
+          image: ghcr.io/divya-gariga/bc58-patient-service:latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://ad84f05f932dd43258f50ff13e2ea493-1486960513.us-east-2.elb.amazonaws.com:3306/zemoso_diagnostics_bc58
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: bootcamp@!58
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-service-deploy
+  labels:
+    name: reports-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: reports
+  template:
+    metadata:
+      name: reports-pod
+      labels:
+        name: reports
+        app: bc58-app
+    spec:
+      containers:
+        - name: reports-img
+          image: ghcr.io/divya-gariga/bc58-reports-service:latest
+          ports:
+            - containerPort: 8084
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://ad84f05f932dd43258f50ff13e2ea493-1486960513.us-east-2.elb.amazonaws.com:3306/zemoso_diagnostics_bc58
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: bootcamp@!58
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service-deploy
+  labels:
+    name: users-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: users
+  template:
+    metadata:
+      name: users-pod
+      labels:
+        name: users
+        app: bc58-app
+    spec:
+      containers:
+        - name: users-img
+          image: ghcr.io/divya-gariga/bc58-users-service:latest
+          ports:
+            - containerPort: 8085
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://ad84f05f932dd43258f50ff13e2ea493-1486960513.us-east-2.elb.amazonaws.com:3306/zemoso_diagnostics_bc58
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: bootcamp@!58
+          envFrom:
+            - configMapRef:
+                name: eureka-details
+      imagePullSecrets:
+        - name: regcred

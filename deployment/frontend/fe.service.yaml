@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-service
+  labels:
+    name: frontend-service
+    app: bc58-app
+  namespace: bc58
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+      name: frontend
+  
+    

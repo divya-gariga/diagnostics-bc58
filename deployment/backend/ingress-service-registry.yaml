@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bc58-app-service-registry
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: bc58
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: serviceregistry.bc58.tk
+      http:
+        paths:
+          - path: /eureka
+            pathType: Prefix
+            backend:
+              service:
+                name: service-registry-service
+                port:
+                  number: 8761

@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bc58-app-backend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+  namespace: bc58
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: data.bc58.tk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway-service
+                port:
+                  number: 9191
+          - path: /(appointments)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: appointment-service
+                port:
+                  number: 8081
+          - path: /(labs)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: labs-service
+                port:
+                  number: 8082
+          - path: /(patients)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: patient-service
+                port:
+                  number: 8083
+          - path: /(reports)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-service
+                port:
+                  number: 8084
+          - path: /(users)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 8085
+          - path: /(address)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 8085
