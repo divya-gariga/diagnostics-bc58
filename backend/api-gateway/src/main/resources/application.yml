@@ -1,0 +1,50 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud.gateway:
+    discovery:
+      locator:
+        enabled: true
+        lowerCaseServiceId: true
+    default-filters:
+      - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+    globalcors:
+      corsConfigurations:
+        "[/**]":
+          allowedOrigins: "*"
+          allowedMethods: "*"
+          allowedHeaders: "*"
+    routes:
+      - id: LABS-SERVICE
+        uri: lb://LABS-SERVICE
+        predicates:
+          - Path=/labs/**
+      - id: APPOINTMENTS-SERVICE
+        uri: lb://APPOINTMENTS-SERVICE
+        predicates:
+          - Path=/appointments/**,/appointments/
+      - id: PATIENTS-SERVICE
+        uri: lb://PATIENTS-SERVICE
+        predicates:
+          - Path=/patients/**
+      - id: REPORTS-SERVICE
+        uri: lb://REPORTS-SERVICE
+        predicates:
+          - Path=/reports/**
+      - id: USERS-SERVICE
+        uri: lb://USERS-SERVICE
+        predicates:
+          - Path=/users/**,/address/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost
+

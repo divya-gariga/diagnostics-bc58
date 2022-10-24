@@ -1,0 +1,66 @@
+{
+  "patients": [
+    {
+      "id": "6306daeb594c21c39684bc46",
+      "patientDetails": [
+        {
+          "relation": "Self",
+          "name": "Patrcik Smith",
+          "age": 15,
+          "gender": "Male",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "addresses": [
+    {
+      "id": "6306daeb594c21c39684bc46",
+      "addressDetails": [
+        {
+          "houseDetails": "2232 Mountain View",
+          "areaDetails": "Calfornia",
+          "zipcode": "1000132",
+          "city": "USA",
+          "addressType": "HOME"
+        }
+      ]
+    }
+  ],
+  "slotsBooked": [
+    {
+      "id": "6306daeb594c21c39684bc46",
+      "slots": [
+
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "id": "6306daeb594c21c39684bc46",
+      "upcomingReports": [
+
+      ]
+    }
+  ],
+  "labs": [
+    {
+      "id": 1,
+      "labIcon": "https://s3-alpha-sig.figma.com/img/f08a/3acf/2a358527f5f65e9144fdaa2eef1e5bde?Expires=1662336000&Signature=DICZnSqf64L~7QUMm82ZFbA7cxR4adilH8XbV2tks5XMkzujqOJwzeEMdhm8DMMLhJvY7M~0hJVna45viw2TYiO~qn5JBg7XwPgwdlKsWjojBDCALLqlXiu6h6oCGZ7PXHqB9RebFviwjXH5pE1lFTIb9LRLHyRXl6NcEPhRbIvN0OkF8f-qiAki3B8i23b88Op4bdb3IGBXvJfpiWXsiSjBSTsUZ1Xa7hgte3kZKcjCeud-Wc3nqiielJqu1eZPcjOGt3Bznaw~jp1p91kHAuCOhlR5m0qeqPyl4s~0qYzgP2Mb1GJbTBYOAMY78sI1rbLkOY0E-KGUCCHpi7rmWQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+      "labName": "Los Altos Center Lab",
+      "time": "24 hrs",
+      "cost": "$1200",
+      "rating": "4.3",
+      "slots": 4
+    },
+    {
+      "id": 2,
+      "labIcon": "https://s3-alpha-sig.figma.com/img/f08a/3acf/2a358527f5f65e9144fdaa2eef1e5bde?Expires=1662336000&Signature=DICZnSqf64L~7QUMm82ZFbA7cxR4adilH8XbV2tks5XMkzujqOJwzeEMdhm8DMMLhJvY7M~0hJVna45viw2TYiO~qn5JBg7XwPgwdlKsWjojBDCALLqlXiu6h6oCGZ7PXHqB9RebFviwjXH5pE1lFTIb9LRLHyRXl6NcEPhRbIvN0OkF8f-qiAki3B8i23b88Op4bdb3IGBXvJfpiWXsiSjBSTsUZ1Xa7hgte3kZKcjCeud-Wc3nqiielJqu1eZPcjOGt3Bznaw~jp1p91kHAuCOhlR5m0qeqPyl4s~0qYzgP2Mb1GJbTBYOAMY78sI1rbLkOY0E-KGUCCHpi7rmWQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+      "labName": "Los Altos Center Lab",
+      "time": "24 hrs",
+      "cost": "$1200",
+      "rating": "4.3",
+      "slots": 4
+    }
+  ]
+}
