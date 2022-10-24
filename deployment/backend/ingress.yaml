@@ -18,6 +18,13 @@ spec:
                 name: api-gateway-service
                 port:
                   number: 9191
+          - path: /(eureka)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: service-registry-service
+                port:
+                  number: 8761
           - path: /(appointments)(.*)
             pathType: Prefix
             backend:
