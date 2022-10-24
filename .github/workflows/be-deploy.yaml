@@ -1,4 +1,4 @@
-name: frontend deployment
+name: micro-services deployment
 on:
   push:
     branches:
