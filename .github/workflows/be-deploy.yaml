@@ -1,8 +1,11 @@
-name: micro-services deployment
+name: frontend deployment
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 jobs:
   build_services:
     runs-on: ubuntu-latest
