@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: mockserver-img
-          image: ghcr.io/divya-gariga/bc58-data
+          image: ghcr.io/divya-gariga/bc58-data:1234
           ports:
             - containerPort: 3003
       imagePullSecrets:
