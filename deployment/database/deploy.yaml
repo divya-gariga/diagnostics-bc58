@@ -22,8 +22,6 @@ spec:
           image: mysql:latest
           ports:
             - containerPort: 3306
-          # volumes:
-          #   - ./dbdesignscript.sql:/docker-entrypoint-initdb.d
           env: 
            - name: MYSQL_ROOT_PASSWORD
              value: Bootcamp@58
