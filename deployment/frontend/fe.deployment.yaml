@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: frontend-img
-          image: ghcr.io/divya-gariga/bc58-fe:${{git.sha}}
+          image: ghcr.io/divya-gariga/bc58-fe
           ports:
             - containerPort: 80
           env:
