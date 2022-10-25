@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-deploy
+  labels:
+    name: mockserver-deploy
+    app: bc58-app
+  namespace: bc58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mockserver
+  template:
+    metadata:
+      name: mockserver-pod
+      labels:
+        name: mockserver
+        app: bc58-app
+    spec:
+      containers:
+        - name: mockserver-img
+          image: ghcr.io/divya-gariga/bc58-data
+          ports:
+            - containerPort: 3003
+      imagePullSecrets:
+        - name: regcred

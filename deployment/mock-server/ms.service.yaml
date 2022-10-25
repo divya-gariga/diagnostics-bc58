@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-service
+  labels:
+    name: mockserver-service
+    app: bc58-app
+  namespace: bc58
+spec:
+  ports:
+    - port: 3003
+      targetPort: 3003
+  selector:
+      name: mockserver
+  
+    

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc58-db-svc
+  labels:
+    app: bc58
+  namespace: bc58
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: bc58-db
+    
+  template:
+    metadata:
+      name: bc58-db
+      labels:
+        app: bc58-db
+    spec:
+      containers:
+        - name: data
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env: 
+           - name: MYSQL_ROOT_PASSWORD
+             value: Bootcamp@58
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bc58-db
+  labels:
+    app: bc58-db
+  namespace: bc58
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: bc58-db
