@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - frontend
+      - deployment/frontend
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
@@ -22,10 +25,9 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
       - name: build mock-server
-        run: docker build . -t ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-data:latest
+        run: docker build . -t ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-data:${{ github.sha }}
       - name: push mock-server
-        run: docker push ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-data:latest
-
+        run: docker push ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-data:${{ github.sha }}
   build_frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -48,10 +50,9 @@ jobs:
         env:
           BASE_URL: https://data.bc58.tk/
       - name: build frontend
-        run: docker build . -t ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-fe:latest
+        run: docker build . -t ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-fe:${{ github.sha }}
       - name: push frontend
-        run: docker push ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-fe:latest
-
+        run: docker push ${{ secrets.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/bc58-fe:${{ github.sha }}
   deploy:
     needs: [build_mock_server, build_frontend]
     runs-on: ubuntu-latest
