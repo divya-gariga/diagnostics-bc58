@@ -71,6 +71,6 @@ jobs:
       - name: connect to eks cluster
         run: aws eks --region ${{ secrets.AWS_DEFAULT_REGION }} update-kubeconfig --name ${{ secrets.CLUSTER_NAME }}
       - name: create app
-        run: bash deploy.sh
+        run: bash deploy.sh ${{ github.sha }}
       - name: verify installation
         run: kubectl get all && kubectl get ingress
